@@ -16,16 +16,22 @@ if( command === 'add') {
 
 	if(note) {
 		console.log('Note added.');
-		console.log('__');
-		console.log(`Title: ${note.title}`);
-		console.log(`Body: ${note.body}`);
+		notes.logNote(note);
 	} else {
 		console.log('Title already in use. Duplicate note not added.');
 	}
 } else if ( command === 'list') {
 	notes.getAll();
 } else if (command === 'read') {
-	notes.getNote(argv.title);
+	var note = notes.getNote(argv.title);
+
+	if(note) {
+		console.log('Note being read');
+		notes.logNote(note);
+	} else {
+		console.log('No note found');
+	}
+
 } else if ( command === 'remove') {
 	var noteRemoved = notes.removeNote(argv.title);
 	var message = noteRemoved ? 'Note was removed' : 'Note not found';
